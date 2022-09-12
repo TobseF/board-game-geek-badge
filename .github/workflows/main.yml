@@ -26,11 +26,11 @@ jobs:
           SAMPLE_COUNT: 42
         run: |
           echo "SAMPLE_COUNT: $SAMPLE_COUNT"
-          echo "SAMPLE_COUNT: ${{ SAMPLE_COUNT }}"
+          echo "SAMPLE_COUNT: $GAME_COUNT_2"
+          echo "SAMPLE_COUNT: $UPDATE_BADGE_2"
           echo "GAME_COUNT: ${{ env.GAME_COUNT }}"
           echo "GAME_COUNT_2:  ${{ env.GAME_COUNT_2 }}"
           echo "SAMPLE_COUNT: ${{ env.SAMPLE_COUNT }}"
-          echo "GAME_COUNT_2: ${{ GAME_COUNT_2 }}
 
       - name: Commit files
         env:
