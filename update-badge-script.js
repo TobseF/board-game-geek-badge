@@ -73,10 +73,11 @@ function setGameCountEnv(count) {
 }
 
 function setEnv(key, value) {
-    if (debug) {
-        console.log("New Property: " + key + "=" + value);
-    } else {
+    if (!debug) {
+        console.log("Setting Property: " + key + "=" + value);
         fs.writeFileSync(process.env.GITHUB_ENV, key + "=" + value);
+    }else{
+        console.log("New Property: " + key + "=" + value);
     }
 }
 
