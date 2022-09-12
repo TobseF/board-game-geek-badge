@@ -21,15 +21,16 @@ jobs:
         run: node ./update-badge-script.js
       - name: Log Vars
         env:
-          UPDATE_BADGE: ${{ env.update-badge }}
-          GAME_COUNT: ${{ env.game-count }}
+          UPDATE_BADGE_2: ${{ env.UPDATE_BADGE }}
+          GAME_COUNT_2: ${{ env.$GAME_COUNT }}
           SAMPLE_COUNT: 42
         run: |
-          echo "SAMPLE_COUNT: $SAMPLE_COUNT"
-          echo "update-badge: update-badge"
           echo "GAME_COUNT: $GAME_COUNT"
-          echo "game-count: $game-count"
-          echo "SAMPLE_COUNT: $SAMPLE_COUNT"
+          echo "GAME_COUNT_2: $GAME_COUNT_2"
+          echo "UPDATE_BADGE: $UPDATE_BADGE"
+          echo "UPDATE_BADGE_2: $UPDATE_BADGE_2"
+          echo "UPDATE_BADGE_2: $SAMPLE_COUNT"
+
       - name: Commit files
         env:
           GAME_COUNT: ${{ env.game-count }}

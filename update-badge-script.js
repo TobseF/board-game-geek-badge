@@ -65,11 +65,11 @@ function updateBadge(xmlResult) {
 }
 
 function setUpdateBannerEnv(value) {
-    setEnv("update-badge", value)
+    setEnv("UPDATE_BADGE", value)
 }
 
 function setGameCountEnv(count) {
-    setEnv("game-count", count)
+    setEnv("GAME_COUNT", count)
 }
 
 function setEnv(key, value) {
