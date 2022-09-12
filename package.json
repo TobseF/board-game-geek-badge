@@ -1,0 +1,9 @@
+{
+  "name": "stackoverflow-badge",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "node-fetch": "^3.2.10",
+    "xml2js": "^0.4.23"
+  }
+}
