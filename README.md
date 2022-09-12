@@ -2,7 +2,7 @@
 This is a [BoardGameGeek](https://boardgamegeek.com)-Badge SVG graphic which shows the number of owned games.
 The counter gets automatically updated by a [GitHub CI workflow](https://resources.github.com/ci-cd/).
 
-![board-game-count](https://raw.githubusercontent.com/TobseF/board-game-geek-badge/master/board-game-geek-count-template.svg)
+![board-game-count](https://raw.githubusercontent.com/TobseF/board-game-geek-badge/master/board-game-geek-count.svg)
 
 ## ⭐ Features
  ⭐ Customizable  
