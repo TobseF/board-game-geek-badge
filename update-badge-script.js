@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
 import xml2js from 'xml2js';
-import core from 'actions/core';
+import core from '@actions/core';
 
 
 let userName = "Topsee"
