@@ -41,6 +41,7 @@ function updateBadge(xmlResult) {
         let compiledBadge = compileTemplate(templateData, gameCount);
         let oldBadge = readFile(outputFile);
 
+        setGameCountEnv(gameCount)
         if (oldBadge === compiledBadge) {
             console.log("Badge data has not changed. Skipping commit.");
             setUpdateBannerEnv("false")
@@ -48,7 +49,6 @@ function updateBadge(xmlResult) {
             console.log("Updating badge ...");
             fs.writeFileSync("./" + outputFile, compiledBadge);
             console.log("Updated " + outputFile + " successfully");
-            setGameCountEnv(gameCount)
             setUpdateBannerEnv("true")
         }
     } catch (error) {
