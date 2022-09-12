@@ -69,7 +69,7 @@ function setUpdateBannerEnv(value) {
 }
 
 function setGameCountEnv(count) {
-    setEnv("GAMECOUNT", count)
+    setEnv("game-count", count)
 }
 
 function setEnv(key, value) {
