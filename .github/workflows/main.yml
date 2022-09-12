@@ -25,6 +25,7 @@ jobs:
           GAME_COUNT_2: ${{ env.GAME_COUNT }}
           SAMPLE_COUNT: 42
         run: |
+          echo "GAME_COUNT_OUT: ${{ steps.update-badge.outputs.GAME_COUNT }}"
           echo "SAMPLE_COUNT: $SAMPLE_COUNT"
           echo "SAMPLE_COUNT: $GAME_COUNT_2"
           echo "SAMPLE_COUNT: $UPDATE_BADGE_2"

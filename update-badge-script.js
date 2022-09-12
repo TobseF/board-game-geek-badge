@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
 import xml2js from 'xml2js';
+import core from 'actions/core';
 
 
 let userName = "Topsee"
@@ -73,6 +74,7 @@ function setGameCountEnv(count) {
 }
 
 function setEnv(key, value) {
+    core.setOutput(key, value);
     if (!debug) {
         console.log("Setting Property: " + key + "=" + value);
         fs.writeFileSync(process.env.GITHUB_ENV, key + "=" + value);
