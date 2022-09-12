@@ -22,7 +22,7 @@ jobs:
       - name: Log Vars
         env:
           UPDATE_BADGE_2: ${{ env.UPDATE_BADGE }}
-          GAME_COUNT_2: ${{ env.$GAME_COUNT }}
+          GAME_COUNT_2: ${{ env.GAME_COUNT }}
           SAMPLE_COUNT: 42
         run: |
           echo "GAME_COUNT: $GAME_COUNT"
