@@ -19,15 +19,27 @@ jobs:
       - run: npm ci
       - id: update-badge
         run: node ./update-badge-script.js
+      - name: Log Vars
+        env:
+          UPDATE_BADGE: ${{ env.update-badge }}
+          GAME_COUNT: ${{ env.game-count }}
+          SAMPLE_COUNT: 42
+        run: |
+          echo "SAMPLE_COUNT: $SAMPLE_COUNT"
+          echo "update-badge: update-badge"
+          echo "GAME_COUNT: $GAME_COUNT"
+          echo "game-count: $game-count"
+          echo "SAMPLE_COUNT: $SAMPLE_COUNT"
       - name: Commit files
         env:
           GAME_COUNT: ${{ env.game-count }}
+          SAMPLE_COUNT: 42
         if: env.update-badge == 'true'
         run: |
          git config --local user.email "gihub-bot.tobse.eu"
          git config --local user.name "github-james"
          git add board-game-geek-count.svg
-         git commit -m "🤖 Update Badge - New game count: $GAME_COUNT" -a
+         git commit -m "🤖 Update Badge - New game $SAMPLE_COUNT count: $GAME_COUNT" -a
       - name: Push changes
         if: env.update-badge == 'true'
         uses: ad-m/github-push-action@master
