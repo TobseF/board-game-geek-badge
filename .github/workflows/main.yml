@@ -25,7 +25,7 @@ jobs:
          git config --local user.email "gihub-bot.tobse.eu"
          git config --local user.name "github-james"
          git add board-game-geek-count.svg
-         git commit -m "🤖 Update Badge - New game count: $gameCount" -a
+         git commit -m "🤖 Update Badge - New game count: $GAMECOUNT" -a
       - name: Push changes
         if: env.update-badge == 'true'
         uses: ad-m/github-push-action@master
