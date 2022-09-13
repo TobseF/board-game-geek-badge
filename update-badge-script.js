@@ -48,21 +48,21 @@ function updateBadge(xmlResult) {
         setGameCount(gameCount)
         if (oldBadge === compiledBadge) {
             console.info("Badge data has not changed. Skipping commit.");
-            setUpdateBanner("false")
+            setUpdateBanner(false)
         } else {
             console.info("🎲 New game count: " + gameCount);
             console.info("Updating badge ...");
             fs.writeFileSync("./" + outputFile, compiledBadge);
-            console.log("Updated " + outputFile + " successfully");
-            setUpdateBanner("true")
+            console.info("Updated " + outputFile + " successfully");
+            setUpdateBanner(true)
         }
     } catch (error) {
         if (retries > 0) {
             retries--
-            setTimeout(() => {
-                console.log("This is the first function")
-            }, retryWaitMS);
             console.info("Retry " + retries);
+            setTimeout(() => {
+                fetchApi()
+            }, retryWaitMS);
         } else {
             console.error(error);
         }
@@ -82,7 +82,6 @@ function setGameCount(count) {
  */
 function setOutput(key, value) {
     core.setOutput(key, value);
-    console.debug("New output property: " + key + "=" + value);
 }
 
 function readFile(file) {
