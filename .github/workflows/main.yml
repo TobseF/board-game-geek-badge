@@ -19,34 +19,20 @@ jobs:
       - run: npm ci
       - id: update-badge
         run: node ./update-badge-script.js
-      - name: Log Vars
-        env:
-          UPDATE_BADGE_2: ${{ env.UPDATE_BADGE }}
-          GAME_COUNT_2: ${{ env.GAME_COUNT }}
-          SAMPLE_COUNT: 42
-          GAME_COUNT: ${{ steps.update-badge.outputs.GAME_COUNT }}"
-        run: |
-          echo "GAME_COUNT_OUT: ${{ steps.update-badge.outputs.GAME_COUNT }}"
-          echo "GAME_COUNT_ENV: $GAME_COUNT"
-          echo "SAMPLE_COUNT: $SAMPLE_COUNT"
-          echo "SAMPLE_COUNT: $GAME_COUNT_2"
-          echo "SAMPLE_COUNT: $UPDATE_BADGE_2"
-          echo "GAME_COUNT: ${{ env.GAME_COUNT }}"
-          echo "GAME_COUNT_2:  ${{ env.GAME_COUNT_2 }}"
-          echo "SAMPLE_COUNT: ${{ env.SAMPLE_COUNT }}"
-
       - name: Commit files
         env:
-          GAME_COUNT: ${{ env.game-count }}
-          SAMPLE_COUNT: 42
-        if: env.update-badge == 'true'
+          GAME_COUNT: ${{ steps.update-badge.outputs.GAME_COUNT }}
+          UPDATE_BADGE: ${{ steps.update-badge.outputs.UPDATE_BADGE }}
+        if: env.UPDATE_BADGE == 'true'
         run: |
          git config --local user.email "gihub-bot.tobse.eu"
          git config --local user.name "github-james"
          git add board-game-geek-count.svg
-         git commit -m "🤖 Update Badge - New game $SAMPLE_COUNT count: $GAME_COUNT" -a
+         git commit -m "🤖 Update Badge - New game count: $GAME_COUNT" -a
       - name: Push changes
-        if: env.update-badge == 'true'
+        env:
+          UPDATE_BADGE: ${{ steps.update-badge.outputs.UPDATE_BADGE }}
+        if: env.UPDATE_BADGE == 'true'
         uses: ad-m/github-push-action@master
         with:
          github_token: ${{ secrets.GITHUB_TOKEN }}

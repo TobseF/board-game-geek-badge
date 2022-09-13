@@ -6,7 +6,6 @@ import core from '@actions/core';
 
 let userName = "Topsee"
 
-let debug = false
 let templateFile = 'board-game-geek-count-template.svg'
 let outputFile = 'board-game-geek-count.svg'
 let apiURL = "https://boardgamegeek.com/xmlapi/collection/"
@@ -14,6 +13,10 @@ let repoCountUrl = apiURL + userName + "?own=1"
 
 let xmlParser = new xml2js.Parser()
 
+/**
+ * We need a retry, because the xmlapi is lazy and may return just a message:
+ * > `Please try again later for access`
+ */
 let retries = 10
 let retryWaitMS = 500
 
@@ -42,15 +45,16 @@ function updateBadge(xmlResult) {
         let compiledBadge = compileTemplate(templateData, gameCount);
         let oldBadge = readFile(outputFile);
 
-        setGameCountEnv(gameCount)
+        setGameCount(gameCount)
         if (oldBadge === compiledBadge) {
-            console.log("Badge data has not changed. Skipping commit.");
-            setUpdateBannerEnv("false")
+            console.info("Badge data has not changed. Skipping commit.");
+            setUpdateBanner("false")
         } else {
-            console.log("Updating badge ...");
+            console.info("🎲 New game count: " + gameCount);
+            console.info("Updating badge ...");
             fs.writeFileSync("./" + outputFile, compiledBadge);
             console.log("Updated " + outputFile + " successfully");
-            setUpdateBannerEnv("true")
+            setUpdateBanner("true")
         }
     } catch (error) {
         if (retries > 0) {
@@ -65,22 +69,20 @@ function updateBadge(xmlResult) {
     }
 }
 
-function setUpdateBannerEnv(value) {
-    setEnv("UPDATE_BADGE", value)
+function setUpdateBanner(value) {
+    setOutput("UPDATE_BADGE", value)
 }
 
-function setGameCountEnv(count) {
-    setEnv("GAME_COUNT", count)
+function setGameCount(count) {
+    setOutput("GAME_COUNT", count)
 }
 
-function setEnv(key, value) {
+/**
+ * Output will be available to the next GitHub action step
+ */
+function setOutput(key, value) {
     core.setOutput(key, value);
-    if (!debug) {
-        console.log("Setting Property: " + key + "=" + value);
-        fs.writeFileSync(process.env.GITHUB_ENV, key + "=" + value);
-    }else{
-        console.log("New Property: " + key + "=" + value);
-    }
+    console.debug("New output property: " + key + "=" + value);
 }
 
 function readFile(file) {

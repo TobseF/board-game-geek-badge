@@ -32,4 +32,3 @@ The script can be configured to generate a badge for any user:
    On Line 6:  
    `- cron: '0 0 * * *'` (every day at midnight).
    Uses the [cron-job syntax](https://crontab.guru/every-midnight).
-* `debug`: Set `true` for debugging on a local machine.
